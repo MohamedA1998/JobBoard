@@ -19,32 +19,32 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name'  => 'Mohamed Alsayed' ,
-            'email' => 'm@m.com'
+            'name'  => 'Admin',
+            'email' => 'admin@admin.com'
         ]);
 
         User::factory(300)->create();
 
         $users = User::all()->shuffle();
-        for ($i=0; $i <= 20; $i++) {
+        for ($i = 0; $i <= 20; $i++) {
             Employer::factory()->create([
                 'user_id'   => $users->pop()->id
             ]);
         }
 
         $employers = Employer::all();
-        for ($i=0; $i < 100; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             Job::factory()->create([
                 'employer_id'   => $employers->random()->id
             ]);
         }
 
-        foreach($users as $user){
-            $jobs = Job::inRandomOrder()->take(rand(0 , 4))->get();
+        foreach ($users as $user) {
+            $jobs = Job::inRandomOrder()->take(rand(0, 4))->get();
 
-            foreach($jobs as $job){
+            foreach ($jobs as $job) {
                 JobApplication::factory()->create([
-                    'job_id'    => $job->id ,
+                    'job_id'    => $job->id,
                     'user_id'   => $user->id
                 ]);
             }
