@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function(){
         ->resource('my-jobs' , MyJobController::class);
 });
 
+Route::resource('fcm', \App\Http\Controllers\FcmController::class);
+
 
 //Route::get('mail' , function (){
 //   $jobs = \App\Models\Job::NewsLetter()->get();
